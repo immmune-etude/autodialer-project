@@ -99,6 +99,14 @@ def callback():
 def home():
     return "🚀 Autodialer is running!"
 
+@app.route("/view-callbacks")
+def view_callbacks():
+    try:
+        with open("callbacks.csv", "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        return "No callbacks yet"
+
 # ---------- MAIN ----------
 from threading import Thread
 
