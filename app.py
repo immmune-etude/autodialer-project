@@ -87,7 +87,10 @@ def callback():
         writer.writerow([number, timestamp, "callback"])
 
     return "OK"
-
+    
+@app.route("/")
+def home():
+    return "🚀 Autodialer is running!"
 
 # ---------- MAIN ----------
 from threading import Thread
