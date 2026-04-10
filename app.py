@@ -57,36 +57,42 @@ def dial_numbers():
 
 
 # ---------- OPTIONAL CALLBACK TRACKING ----------
+from flask import Response
+
 @app.route("/callback", methods=["POST"])
 def callback():
     number = request.form.get("From")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    print("CALLBACK:", number, timestamp)
+    print("\n📞 INCOMING CALLBACK")
+    print("Number:", number)
+    print("Time:", timestamp)
+    print("-------------------------\n")
 
-    # file name
     file_name = "callbacks.csv"
 
-    # check if file exists
     file_exists = False
     try:
         with open(file_name, "r"):
             file_exists = True
     except FileNotFoundError:
-        file_exists = False
+        pass
 
-    # write to CSV
     with open(file_name, "a", newline="") as file:
         writer = csv.writer(file)
 
-        # write header if file is new
         if not file_exists:
             writer.writerow(["phone", "timestamp", "status"])
 
-        # write row
         writer.writerow([number, timestamp, "callback"])
 
-    return "OK"
+    return Response("""
+<Response>
+    <Say voice="Polly.Matthew">
+        Thanks for calling back. We will reach out shortly.
+    </Say>
+</Response>
+""", mimetype="text/xml")
     
 @app.route("/")
 def home():
