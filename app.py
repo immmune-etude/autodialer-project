@@ -9,9 +9,9 @@ from datetime import datetime
 app = Flask(__name__)
 
 # 🔐 IMPORTANT: replace with NEW credentials after rotating token
-ACCOUNT_SID = "AC02cfd94fcd378d745660e6c08c1bd0a6"
-AUTH_TOKEN = "e0c8e148a2cad24f8252e229d903c57a"
-TWILIO_NUMBER = "+14243659512"
+ACCOUNT_SID = ""
+AUTH_TOKEN = ""
+TWILIO_NUMBER = ""
 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
